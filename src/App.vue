@@ -25,7 +25,6 @@
 
         methods: {
             onSearch(results) {
-                console.log(results);
                 this.events = results;
             }
         }
