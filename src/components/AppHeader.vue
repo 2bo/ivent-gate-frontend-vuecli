@@ -77,14 +77,14 @@
                 this.typeOptions = response.data
             },
             searchEvents: async function () {
-                const response = await axios.get('/events', {
+                const response = await axios.get('/events/search', {
                     params: {
                         places: this.places,
                         types: this.types,
                         keywords: this.keywords
                     }
                 });
-                console.log(response.data);
+                this.$emit('search', response.data);
             }
         },
         mounted() {

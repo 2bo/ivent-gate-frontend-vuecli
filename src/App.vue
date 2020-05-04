@@ -1,26 +1,33 @@
 <template>
-  <v-app>
-    <AppHeader></AppHeader>
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-  </v-app>
+    <v-app>
+        <AppHeader @search="onSearch"></AppHeader>
+        <v-content>
+            <HelloWorld/>
+        </v-content>
+    </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-import AppHeader from './components/AppHeader';
+    import HelloWorld from './components/HelloWorld';
+    import AppHeader from './components/AppHeader';
 
-export default {
-  name: 'App',
+    export default {
+        name: 'App',
 
-  components: {
-    HelloWorld,
-    AppHeader,
-  },
+        components: {
+            HelloWorld,
+            AppHeader,
+        },
 
-  data: () => ({
-    //
-  }),
-};
+        data: () => ({
+            events: []
+        }),
+
+        methods: {
+            onSearch(results) {
+                console.log(results);
+                this.events = results;
+            }
+        }
+    };
 </script>
