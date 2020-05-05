@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar color="bluegray">
+    <v-app-bar color="bluegray" app>
         <v-toolbar-title><span class="title mr-5">Ivent Gate</span></v-toolbar-title>
         <v-select
                 v-model="places"
