@@ -27,7 +27,7 @@
         </v-select>
         <v-text-field
                 v-model.trim="keywords"
-                @keydown.enter="searchEvents"
+                @keydown.enter="search"
                 flat
                 hide-details
                 autofocus
@@ -36,7 +36,7 @@
                 class="shrink"
         />
         <v-btn
-                @click="searchEvents"
+                @click="search"
                 outlined
                 color="primary"
                 class="d-none d-sm-flex"
@@ -49,9 +49,7 @@
 
 <script>
     import axios from "axios"
-    import {mdiMagnify} from '@mdi/js'
-    import {mdiMap} from '@mdi/js'
-    import {mdiPresentation} from '@mdi/js'
+    import {mdiMagnify, mdiMap, mdiPresentation} from '@mdi/js'
 
     export default {
         name: "Header",
@@ -59,9 +57,6 @@
             return {
                 placeOptions: [],
                 typeOptions: [],
-                places: [],
-                types: [],
-                keywords: "",
                 searchIcon: mdiMagnify,
                 mapIcon: mdiMap,
                 typeIcon: mdiPresentation
@@ -76,12 +71,38 @@
                 const response = await axios.get('/condition/type');
                 this.typeOptions = response.data
             },
-            searchEvents: async function () {
-                this.$emit('search', {
-                    places: this.places,
-                    types: this.types,
-                    keywords: this.keywords
-                });
+            search() {
+                this.$store.dispatch('searchEvents');
+                this.$router.push({
+                    path: 'search',
+                    query: {places: this.places, types: this.types, keywords: this.keywords,}
+                })
+            }
+        },
+        computed: {
+            places: {
+                get() {
+                    return this.$store.getters.getPlaces
+                },
+                set(value) {
+                    this.$store.commit('setPlaces', value)
+                }
+            },
+            types: {
+                get() {
+                    return this.$store.getters.getTypes
+                },
+                set(value) {
+                    this.$store.commit('setTypes', value)
+                }
+            },
+            keywords: {
+                get() {
+                    return this.$store.getters.getKeywords
+                },
+                set(value) {
+                    this.$store.commit('setKeywords', value)
+                }
             }
         },
         mounted() {

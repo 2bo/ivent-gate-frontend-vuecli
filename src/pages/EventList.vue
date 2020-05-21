@@ -1,7 +1,11 @@
 <template>
     <div>
-        <AppHeader @search="onSearch"></AppHeader>
         <v-content>
+            <v-progress-linear
+                    :active="isLoading"
+                    :indeterminate="isLoading"
+                    :fixed=true
+            ></v-progress-linear>
             <v-container>
                 <v-row justify="center">
                     <v-col cols="7" v-for="event in events" :key="event.id">
@@ -18,7 +22,7 @@
                             <v-pagination
                                     v-model="current_page"
                                     :length="last_page"
-                                    @input="searchEvents"
+                                    @input="paging"
                             ></v-pagination>
                         </v-container>
                     </v-col>
@@ -29,65 +33,50 @@
 </template>
 
 <script>
-    import axios from "axios";
-    import AppHeader from '../components/AppHeader';
     import EventCard from '../components/EventCard'
-
+    import {mapGetters} from 'vuex'
 
     export default {
         name: 'EventList',
 
         components: {
-            AppHeader,
             EventCard
         },
-
-        data: () => ({
-            events: [],
-            current_page: 1,
-            last_page: 0
-        }),
-        props: ['p', 't', 'k'],
-        methods: {
-            onSearch: function (params) {
-                this.places = params.places;
-                this.types = params.types;
-                this.keywords = params.keywords;
-                this.current_page = 1;
-                this.searchEvents()
+        computed: {
+            ...mapGetters({
+                events: 'getEvents',
+                last_page: 'getLastPage',
+                places: 'getPlaces',
+                types: 'getTypes',
+                keywords: 'getKeywords',
+                isLoading: 'isLoading'
+            }),
+            current_page: {
+                get() {
+                    return this.$store.getters.getPage
+                },
+                set(value) {
+                    this.$store.commit('setPage', value)
+                }
             },
-            searchEvents: async function () {
-                const response = await axios.get('/events/search', {
-                    params: {
-                        places: this.places,
-                        types: this.types,
-                        keywords: this.keywords,
-                        page: this.current_page
-                    }
-                });
-
-                this.events = response.data.data;
-                this.current_page = response.data.current_page;
-                this.last_page = response.data.last_page;
-
+        },
+        methods: {
+            paging() {
+                this.$store.dispatch('pagingEvents');
                 this.$router.push({
-                    path: 'search', query: {
-                        places: this.places,
-                        types: this.types,
-                        keywords: this.keywords,
-                        page: this.current_page
-                    }
-                })
+                    path: 'search',
+                    query: {places: this.places, types: this.types, keywords: this.keywords, page: this.current_page},
+                });
+            },
+            scrollToTop() {
+                window.scrollTo(0, 0);
             }
+
         },
         watch: {
-            '$route': function (to, from) {
-                console.log(`画面遷移前のpath：${from}`);
-                console.log(`画面遷移後のpath：${to}`);
-                console.log(this.p);
-                console.log(this.t);
-                console.log(this.k);
+            current_page: function () {
+                this.scrollToTop()
             }
-        },
+        }
     };
 </script>
