@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import eventsApi from './api/eventsApi'
+import eventsApi from './api/EventsApi'
 
 Vue.use(Vuex);
 
