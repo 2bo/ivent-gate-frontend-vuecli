@@ -10,11 +10,19 @@
                 <v-row justify="center">
                     <v-col cols="7" v-for="event in events" :key="event.id">
                         <EventCard :title="event.title"
+                                   :site_name="event.site_name"
                                    :catch_text="event.catch"
                                    :started_at="event.started_at"
+                                   :address="event.address"
+                                   :place="event.place"
+                                   :ended_at="event.ended_at"
                                    :event_url="event.event_url"
-                                   :description="event.description">
-
+                                   :description="event.description"
+                                   :limit="event.limit"
+                                   :participants="event.participants"
+                                   :waiting="event.waiting"
+                                   :tags="event.tags"
+                        >
                         </EventCard>
                     </v-col>
                     <v-col cols="8">
