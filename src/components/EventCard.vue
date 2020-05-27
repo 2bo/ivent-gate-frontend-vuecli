@@ -62,7 +62,6 @@
         ],
         data: function () {
             return {
-                dialog: false,
                 tagIcon: mdiLabel,
                 timeIcon: mdiClockOutline,
                 addressIcon: mdiMapMarker,
