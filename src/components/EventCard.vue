@@ -1,12 +1,15 @@
 <template>
     <div>
-        <v-card @click="dialog = true" class="mx-auto">
-            <v-card-title class="blue--text">
-                <span>{{title}}</span>
+        <v-card class="mx-auto">
+            <v-card-title>
+                <router-link class="blue-grey--text" :to="{ name: 'event', params:{ id: id }}">
+                    {{title}}
+                </router-link>
             </v-card-title>
             <v-card-subtitle v-text="catch_text"></v-card-subtitle>
             <v-card-text>
-                <div> <v-icon left>{{timeIcon}}</v-icon>
+                <div>
+                    <v-icon left>{{timeIcon}}</v-icon>
                     <span>{{display_date}}</span>
                     <v-icon left class="ml-4">{{peopleIcon}}</v-icon>
                     <span>{{display_participants}}</span>
@@ -15,21 +18,23 @@
                     <v-icon left>{{addressIcon}}</v-icon>
                     <span v-text="display_place"></span>
                 </div>
-                <v-chip class="mr-2 mt-4 mb-2" color="teal lighten-5" text-color="teal lighten-2" label
-                        v-for="tag in tag_list"
-                        :key="tag">
-                    <v-icon left>{{tagIcon}}</v-icon>
-                    {{tag}}
-                </v-chip>
-                <div class="ma-1"><img class="logo" :src="logo_image" alt=""></div>
+                <v-card-actions>
+                    <v-chip v-for="tag in tag_list" :key="tag"
+                            class="mr-2 mt-4 mb-2 caption"
+                            color="blue lighten-5"
+                            text-color="blue lighten-2"
+                            label
+                            :to="{ name: 'tag', params:{ name: tag }}"
+                            outlined>
+                        <v-icon left>{{tagIcon}}</v-icon>
+                        {{tag}}
+                    </v-chip>
+                </v-card-actions>
+                <div v-if="logo_image != null" class="ma-1">
+                    <img class="logo" :src="logo_image" :alt="site_name">
+                </div>
             </v-card-text>
         </v-card>
-        <v-dialog v-model="dialog" width="600px">
-            <v-card>
-                <v-card-title><a :href="event_url" target="_blank">{{title}}</a></v-card-title>
-                <v-card-text v-html="description"></v-card-text>
-            </v-card>
-        </v-dialog>
     </div>
 </template>
 
@@ -40,6 +45,7 @@
 
         name: "EventCard",
         props: [
+            'id',
             'title',
             'site_name',
             'catch_text',
@@ -87,10 +93,12 @@
                 return this.date + ' ' + this.start_time + '-' + this.end_time
             },
             display_place: function () {
-                if (this.address === this.place) {
-                    return this.address
+                const address = this.address == null ? '' : this.address;
+                const place = this.place == null ? '' : this.place;
+                if (address === place) {
+                    return address
                 } else {
-                    return this.address + ' ' + this.place
+                    return address + ' ' + place
                 }
             },
             display_participants: function () {
@@ -100,10 +108,10 @@
                 return participants + '/' + limit + '(' + waiting + ')'
             },
             logo_image: function () {
-                if (this.site_name === 'doorkeeper.jp'){
+                if (this.site_name === 'doorkeeper.jp') {
                     return require('@/assets/doorkeeper-logo.png')
                 }
-                if (this.site_name === 'connpass.com'){
+                if (this.site_name === 'connpass.com') {
                     return require('@/assets/connpass-logo.png')
                 }
                 return null
@@ -114,5 +122,13 @@
 <style scoped>
     .logo {
         height: 12px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
     }
 </style>
