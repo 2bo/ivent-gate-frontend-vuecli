@@ -84,7 +84,7 @@
             },
             tag_list: function () {
                 if (this.tags == null) {
-                    return null
+                    return []
                 }
                 return this.tags.split(',')
             },
