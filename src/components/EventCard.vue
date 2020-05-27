@@ -69,43 +69,52 @@
             }
         },
         computed: {
+            //開催日時 example: 5/27(水)
             date: function () {
                 const date = new Date(this.started_at);
                 const daysOfWeeks = ["日", "月", "火", "水", "木", "金", "土"];
                 return `${date.getMonth() + 1}/${date.getDate()}(${daysOfWeeks[date.getDay()]})`
             },
+            //開始時間 example: 19:00
             start_time: function () {
                 const date = new Date(this.started_at);
                 return `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)}`
             },
+            //終了時間 example: 22:00
             end_time: function () {
                 const date = new Date(this.ended_at);
                 return `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)}`
             },
+            //タグの配列
             tag_list: function () {
                 if (this.tags == null) {
                     return []
                 }
                 return this.tags.split(',')
             },
+            //example 5/27(水) 19:00-22:00
             display_date: function () {
                 return this.date + ' ' + this.start_time + '-' + this.end_time
             },
+            //開催住所 場所 example:東京都品川区 カンファレンスルーム
             display_place: function () {
                 const address = this.address == null ? '' : this.address;
                 const place = this.place == null ? '' : this.place;
+                //値が同じ場合は片方のみ
                 if (address === place) {
                     return address
                 } else {
                     return address + ' ' + place
                 }
             },
+            //参加者数/上限(キャンセル待ち) example: 30/30(5)
             display_participants: function () {
                 const participants = this.participants == null ? '?' : this.participants;
                 const limit = this.limit == null ? '?' : this.limit;
                 const waiting = this.waiting == null ? '?' : this.waiting;
                 return participants + '/' + limit + '(' + waiting + ')'
             },
+            //情報取得元のロゴファイル
             logo_image: function () {
                 if (this.site_name === 'doorkeeper.jp') {
                     return require('@/assets/doorkeeper-logo.png')
