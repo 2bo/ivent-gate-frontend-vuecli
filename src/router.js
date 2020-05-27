@@ -6,8 +6,12 @@ import store from './store'
 Vue.use(VueRouter);
 
 const routes = [
-    {path: '/', component: EventList},
-    {path: '/search', component: EventList}
+    {path: '/', name: 'top', component: EventList},
+    {path: '/search', name: 'search', component: EventList},
+    //FIXME: change component
+    {path: '/event/:id', name: 'event', component: EventList},
+    //FIXME: change component
+    {path: '/tag/:name', name: 'tag', component: EventList}
 ];
 
 const router = new VueRouter({
@@ -16,7 +20,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.path === '/search') {
+    if (to.name === 'search') {
         var types;
         if (to.query.types === null || to.query.types === undefined) {
             types = []

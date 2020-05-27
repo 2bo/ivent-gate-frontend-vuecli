@@ -1,6 +1,6 @@
 <template>
-    <v-app-bar color="bluegray" app>
-        <v-toolbar-title><span class="title mr-5">Ivent Gate</span></v-toolbar-title>
+    <v-app-bar color="blue" dark app>
+        <v-toolbar-title class="mr-4">Ivent Gate</v-toolbar-title>
         <v-select
                 v-model="places"
                 :items="placeOptions"
@@ -38,7 +38,6 @@
         <v-btn
                 @click="search"
                 outlined
-                color="primary"
                 class="d-none d-sm-flex"
         >
             <v-icon>{{ searchIcon }}</v-icon>
@@ -74,7 +73,7 @@
             search() {
                 this.$store.dispatch('searchEvents');
                 this.$router.push({
-                    path: 'search',
+                    name: 'search',
                     query: {places: this.places, types: this.types, keywords: this.keywords,}
                 })
             }
