@@ -12,8 +12,6 @@ const routes = [
     {path: '/event/:id', name: 'event', component: EventList},
     //FIXME: change component
     {path: '/tag/:name', name: 'tag', component: EventList}
-
-
 ];
 
 const router = new VueRouter({
