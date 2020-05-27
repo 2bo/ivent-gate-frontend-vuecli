@@ -72,7 +72,6 @@
         },
         methods: {
             paging() {
-                this.$store.dispatch('pagingEvents');
                 this.$router.push({
                     name: 'search',
                     query: {places: this.places, types: this.types, keywords: this.keywords, page: this.current_page},
