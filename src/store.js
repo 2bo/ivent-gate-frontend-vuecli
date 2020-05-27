@@ -75,21 +75,6 @@ const store = new Vuex.Store({
                 places: getters.getPlaces,
                 types: getters.getTypes,
                 keywords: getters.getKeywords,
-                page: 1
-            };
-            const response = await eventsApi.searchEvents(params);
-            commit('setPage', 1);
-            commit('setEvents', response.data.data);
-            commit('setLastPage', response.data.last_page);
-            commit('setLoading', false);
-
-        },
-        async pagingEvents({commit, getters}) {
-            commit('setLoading', true);
-            const params = {
-                places: getters.getPlaces,
-                types: getters.getTypes,
-                keywords: getters.getKeywords,
                 page: getters.getPage
             };
             const response = await eventsApi.searchEvents(params);
