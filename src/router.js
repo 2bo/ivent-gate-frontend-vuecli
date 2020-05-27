@@ -50,7 +50,7 @@ router.beforeEach((to, from, next) => {
         store.commit('setPlaces', places);
         store.commit('setKeywords', to.query.keywords);
         store.commit('setPage', Number(page));
-        store.dispatch('pagingEvents');
+        store.dispatch('searchEvents');
     }
     next()
 });
