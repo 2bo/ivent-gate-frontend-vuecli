@@ -54,7 +54,6 @@
             'started_at',
             'ended_at',
             'event_url',
-            'description',
             'limit',
             'participants',
             'waiting',
