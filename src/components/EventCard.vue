@@ -19,15 +19,15 @@
                     <span v-text="display_place"></span>
                 </div>
                 <v-card-actions>
-                    <v-chip v-for="tag in tag_list" :key="tag"
+                    <v-chip v-for="tag in tags" :key="tag.id"
                             class="mr-2 mt-4 mb-2 caption"
                             color="blue lighten-5"
                             text-color="blue lighten-2"
                             label
-                            :to="{ name: 'tag', params:{ name: tag }}"
+                            :to="{ name: 'tag', params:{ url_name: tag.url_name }}"
                             outlined>
                         <v-icon left>{{tagIcon}}</v-icon>
-                        {{tag}}
+                        {{tag.name}}
                     </v-chip>
                 </v-card-actions>
                 <div v-if="logo_image != null" class="ma-1">
@@ -83,13 +83,6 @@
             end_time: function () {
                 const date = new Date(this.ended_at);
                 return `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)}`
-            },
-            //タグの配列
-            tag_list: function () {
-                if (this.tags == null) {
-                    return []
-                }
-                return this.tags.split(',')
             },
             //example 5/27(水) 19:00-22:00
             display_date: function () {
