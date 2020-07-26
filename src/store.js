@@ -81,6 +81,13 @@ const store = new Vuex.Store({
             commit('setEvents', response.data.data);
             commit('setLastPage', response.data.last_page);
             commit('setLoading', false);
+        },
+        async getEventsFromTag({commit}, {url_name, page}) {
+            commit('setLoading', true);
+            const response = await eventsApi.getEventsFromTag(url_name, page);
+            commit('setEvents', response.data.data);
+            commit('setLastPage', response.data.last_page);
+            commit('setLoading', false);
         }
     }
 });
