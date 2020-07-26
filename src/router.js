@@ -9,8 +9,11 @@ Vue.use(VueRouter);
 const routes = [
     {path: '/', name: 'top', component: EventList},
     {path: '/search', name: 'search', component: EventList},
-    //FIXME: change component
-    {path: '/event/:id', name: 'event', component: EventList},
+    {
+        path: '/event/:id(\\d+)', name: 'event',
+        component: EventDetail,
+        props: route => ({id: Number(route.params.id)})
+    },
     //FIXME: change component
     {path: '/tag/:name', name: 'tag', component: EventList}
 ];
