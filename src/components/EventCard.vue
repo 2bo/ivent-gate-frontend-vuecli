@@ -2,20 +2,20 @@
     <div>
         <v-card class="mx-auto">
             <v-card-title>
-                <router-link class="blue-grey--text" :to="{ name: 'event', params:{ id: id }}">
+                <router-link class="black--text" :to="{ name: 'event', params:{ id: id }}">
                     {{title}}
                 </router-link>
             </v-card-title>
             <v-card-subtitle v-text="catch_text"></v-card-subtitle>
             <v-card-text>
                 <div>
-                    <v-icon left>{{timeIcon}}</v-icon>
+                    <v-icon color="orange" left>{{timeIcon}}</v-icon>
                     <span>{{display_date}}</span>
-                    <v-icon left class="ml-4">{{peopleIcon}}</v-icon>
+                    <v-icon color="pink" left class="ml-4">{{peopleIcon}}</v-icon>
                     <span>{{display_participants}}</span>
                 </div>
                 <div>
-                    <v-icon left>{{addressIcon}}</v-icon>
+                    <v-icon color="green" left>{{addressIcon}}</v-icon>
                     <span v-text="display_place"></span>
                 </div>
                 <v-card-actions>
