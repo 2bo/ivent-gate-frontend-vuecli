@@ -10,5 +10,8 @@ export default {
                 page: params.page
             }
         });
+    },
+    async showEvent($id) {
+        return await axios.get('/events/' + $id)
     }
 }
