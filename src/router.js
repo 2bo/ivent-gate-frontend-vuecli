@@ -2,20 +2,32 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import EventList from './pages/EventList'
 import store from './store'
+import EventDetail from "./pages/EventDetail";
 
 Vue.use(VueRouter);
 
 const routes = [
     {path: '/', name: 'top', component: EventList},
     {path: '/search', name: 'search', component: EventList},
-    //FIXME: change component
-    {path: '/event/:id', name: 'event', component: EventList},
+    {
+        path: '/event/:id(\\d+)', name: 'event',
+        component: EventDetail,
+        props: route => ({id: Number(route.params.id)})
+    },
     //FIXME: change component
     {path: '/tag/:name', name: 'tag', component: EventList}
 ];
 
 const router = new VueRouter({
     mode: 'history',
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+
+        } else {
+            return {x: 0, y: 0};
+        }
+    },
     routes
 });
 
