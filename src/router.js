@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import EventList from './pages/EventList'
 import store from './store'
+import EventList from './pages/EventList'
 import EventDetail from "./pages/EventDetail";
+import TaggedEventList from "./pages/TaggedEventList"
 
 Vue.use(VueRouter);
 
@@ -14,8 +15,7 @@ const routes = [
         component: EventDetail,
         props: route => ({id: Number(route.params.id)})
     },
-    //FIXME: change component
-    {path: '/tag/:name', name: 'tag', component: EventList}
+    {path: '/tag/:url_name', name: 'tag', component: TaggedEventList}
 ];
 
 const router = new VueRouter({
@@ -32,7 +32,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.name === 'search') {
+    if (to.name === 'top' || to.name === 'search') {
         var types;
         if (to.query.types === null || to.query.types === undefined) {
             types = []
@@ -63,6 +63,16 @@ router.beforeEach((to, from, next) => {
         store.commit('setKeywords', to.query.keywords);
         store.commit('setPage', Number(page));
         store.dispatch('searchEvents');
+    }
+    if (to.name === 'tag') {
+        var tagPage;
+        if (to.query.page === null || to.query.page === undefined) {
+            tagPage = 1
+        } else {
+            tagPage = Number(to.query.page)
+        }
+        store.dispatch('getEventsFromTag', {url_name: to.params.url_name, page: tagPage});
+        store.commit('setPage', Number(tagPage));
     }
     next()
 });
