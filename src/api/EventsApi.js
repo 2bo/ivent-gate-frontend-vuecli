@@ -13,5 +13,12 @@ export default {
     },
     async showEvent($id) {
         return await axios.get('/events/' + $id)
+    },
+    async getEventsFromTag(tagUrlName, page) {
+        return await axios.get('/events/tag/' + tagUrlName, {
+            params: {
+                page: page
+            }
+        })
     }
 }

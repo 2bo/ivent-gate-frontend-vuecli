@@ -18,12 +18,12 @@
                             <v-icon color="pink" left>{{icon.people}}</v-icon>
                             {{display_participants}}
                         </p>
-                        <v-chip v-for="tag in event.tags" :key="tag"
+                        <v-chip v-for="tag in event.tags" :key="tag.id"
                                 class="mr-2 mb-2 caption"
                                 color="blue lighten-5"
                                 text-color="blue lighten-2"
                                 label
-                                :to="{ name: 'tag', params:{ name: tag.url_name }}"
+                                :to="{ name: 'tag', params:{ url_name: tag.url_name }}"
                                 outlined>
                             <v-icon left>{{icon.tag}}</v-icon>
                             {{tag.name}}

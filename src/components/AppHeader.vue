@@ -1,6 +1,8 @@
 <template>
     <v-app-bar color="blue" dark app>
-        <v-toolbar-title class="mr-4">Ivent Gate</v-toolbar-title>
+        <v-toolbar-title class="mr-4 title">
+            <router-link :to="{name: 'top'}">Ivent Gate</router-link>
+        </v-toolbar-title>
         <v-select
                 v-model="places"
                 :items="placeOptions"
@@ -111,5 +113,8 @@
 </script>
 
 <style scoped>
-
+    .router-link-active {
+        color: white;
+        text-decoration: none;
+    }
 </style>
