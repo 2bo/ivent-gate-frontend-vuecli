@@ -1,7 +1,7 @@
 <template>
     <v-app-bar color="blue" dark app>
         <v-toolbar-title class="mr-4 title">
-            <router-link :to="{name: 'top'}">Ivent Gate</router-link>
+            <router-link :to="{name: 'top'}">Event Eagle</router-link>
         </v-toolbar-title>
         <v-select
                 v-model="places"
