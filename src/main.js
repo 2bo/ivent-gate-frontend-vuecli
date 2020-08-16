@@ -6,8 +6,7 @@ import axios from 'axios';
 import store from './store'
 
 Vue.config.productionTip = false;
-// FIXME: fix url for production
-axios.defaults.baseURL = 'http://localhost:10080/api';
+axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL;
 
 new Vue({
     vuetify,
