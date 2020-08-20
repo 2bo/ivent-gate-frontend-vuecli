@@ -119,7 +119,6 @@
         },
         methods: {
             toDate(dateString) {
-                console.log(dateString);
                 //safariが-区切りだとエラーになるため置換
                 return new Date(dateString.replace(/-/g, "/"));
             }

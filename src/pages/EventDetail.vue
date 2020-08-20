@@ -1,7 +1,7 @@
 <template>
     <v-content>
         <v-row justify="center">
-            <v-col cols="8">
+            <v-col cols="11" sm="11" md="8" lg="8" xl="8">
                 <v-card v-if="Object.keys(event).length > 0">
                     <v-card-title>{{event.title}}</v-card-title>
                     <v-card-subtitle v-if="event.catch">{{event.catch}}</v-card-subtitle>
