@@ -2,7 +2,7 @@
     <v-content>
         <v-row justify="center">
             <v-col cols="8">
-                <v-card>
+                <v-card v-if="Object.keys(event).length > 0">
                     <v-card-title>{{event.title}}</v-card-title>
                     <v-card-subtitle v-if="event.catch">{{event.catch}}</v-card-subtitle>
                     <v-card-text>
@@ -56,7 +56,7 @@
         },
         data: function () {
             return {
-                event: [],
+                event: {},
                 icon: {
                     tag: mdiLabel,
                     time: mdiClockOutline,
@@ -73,24 +73,26 @@
             getEvent: async function () {
                 const response = await eventsApi.showEvent(this.id);
                 this.event = response.data
+            },
+            toDate: function (dateString) {
+                return new Date(dateString.replace(/-/g, "/"))
             }
         },
-
         computed: {
             //開催日時 example: 5/27(水)
             date: function () {
-                const date = new Date(this.event.started_at.date);
+                const date = this.toDate(this.event.started_at);
                 const daysOfWeeks = ["日", "月", "火", "水", "木", "金", "土"];
                 return `${date.getMonth() + 1}/${date.getDate()}(${daysOfWeeks[date.getDay()]})`
             },
             //開始時間 example: 19:00
             start_time: function () {
-                const date = new Date(this.event.started_at.date);
+                const date = this.toDate(this.event.started_at);
                 return `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)}`
             },
             //終了時間 example: 22:00
             end_time: function () {
-                const date = new Date(this.event.ended_at.date);
+                const date = this.toDate(this.event.ended_at);
                 return `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)}`
             },
             //タグの配列
