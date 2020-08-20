@@ -70,18 +70,18 @@
         computed: {
             //開催日時 example: 5/27(水)
             date: function () {
-                const date = new Date(this.started_at);
+                const date = this.toDate(this.started_at);
                 const daysOfWeeks = ["日", "月", "火", "水", "木", "金", "土"];
                 return `${date.getMonth() + 1}/${date.getDate()}(${daysOfWeeks[date.getDay()]})`
             },
             //開始時間 example: 19:00
             start_time: function () {
-                const date = new Date(this.started_at);
+                const date = this.toDate(this.started_at);
                 return `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)}`
             },
             //終了時間 example: 22:00
             end_time: function () {
-                const date = new Date(this.ended_at);
+                const date = this.toDate(this.ended_at);
                 return `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)}`
             },
             //example 5/27(水) 19:00-22:00
@@ -115,6 +115,13 @@
                     return require('@/assets/connpass-logo.png')
                 }
                 return null
+            }
+        },
+        methods: {
+            toDate(dateString) {
+                console.log(dateString);
+                //safariが-区切りだとエラーになるため置換
+                return new Date(dateString.replace(/-/g, "/"));
             }
         }
     }
