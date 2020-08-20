@@ -15,3 +15,9 @@
         }
     };
 </script>
+
+<style>
+    #app {
+        background-color: #FAFAFA;
+    }
+</style>
