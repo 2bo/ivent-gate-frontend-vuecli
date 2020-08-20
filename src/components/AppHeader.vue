@@ -12,7 +12,7 @@
                 :prepend-inner-icon=mapIcon
                 cache-items
                 clearable
-                class="d-none d-sm-flex shrink"
+                class="d-sm-flex shrink"
         >
         </v-select>
         <v-select
@@ -34,6 +34,7 @@
                 hide-details
                 autofocus
                 clearable
+                type="search"
                 label="keyword"
                 class="shrink"
         />
