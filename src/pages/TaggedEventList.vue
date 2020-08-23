@@ -8,7 +8,7 @@
             ></v-progress-linear>
             <v-container>
                 <v-row justify="center">
-                    <v-col cols="7" v-for="event in events" :key="event.id">
+                    <v-col cols="12" sm="12" md="7" lg="7" xl="7" v-for="event in events" :key="event.id">
                         <EventCard
                                 :id='event.id'
                                 :title="event.title"
