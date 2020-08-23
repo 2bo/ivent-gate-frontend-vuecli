@@ -3,7 +3,7 @@
         <v-row justify="center" no-gutters>
             <v-btn small
                    v-for="link in links"
-                   :key="link"
+                   :key="link.link_name"
                    color="black"
                    text
                    rounded
