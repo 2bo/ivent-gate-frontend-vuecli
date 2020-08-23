@@ -41,7 +41,7 @@
         <v-btn
                 @click="search"
                 outlined
-                class="d-none d-sm-flex"
+                class="d-sm-flex"
         >
             <v-icon>{{ searchIcon }}</v-icon>
 
