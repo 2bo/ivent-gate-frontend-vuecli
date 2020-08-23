@@ -4,6 +4,9 @@ import store from './store'
 import EventList from './pages/EventList'
 import EventDetail from "./pages/EventDetail";
 import TaggedEventList from "./pages/TaggedEventList"
+import About from "./pages/About"
+import Terms from "./pages/Terms"
+import Request from "./pages/Request"
 
 Vue.use(VueRouter);
 
@@ -15,7 +18,10 @@ const routes = [
         component: EventDetail,
         props: route => ({id: Number(route.params.id)})
     },
-    {path: '/tag/:url_name', name: 'tag', component: TaggedEventList}
+    {path: '/tag/:url_name', name: 'tag', component: TaggedEventList},
+    {path: '/about', name: 'about', component: About},
+    {path: '/terms', name: 'terms', component: Terms},
+    {path: '/request', name: 'request', component: Request},
 ];
 
 const router = new VueRouter({
