@@ -5,7 +5,7 @@ services:
     ports:
       - 9050:9050
     volumes:
-      - .:/usr/src/app
+      - .:/usr/src/app:delegated
     stdin_open: true
     tty: true
     command: /bin/sh
