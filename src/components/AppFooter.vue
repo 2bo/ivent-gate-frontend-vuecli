@@ -22,6 +22,7 @@
             links: [
                 {link_name: 'about', name: 'Event Eagleとは'},
                 {link_name: 'terms', name: '利用規約'},
+                {link_name: 'privacy', name: 'プライバシー'},
                 {link_name: 'request', name: 'リクエスト・バグ報告'},
             ],
         }),

@@ -27,7 +27,7 @@
                                 <li>掲載情報が情報取得元の最新情報に比べて古い可能性があります。</li>
                                 <br>
                                 <h3>その他</h3>
-                                勉強会の開催場所を判定するため<a href="http://geoapi.heartrails.com" target="_blank">HeartRails
+                                勉強会の開催場所を判定するため<a href="http://geoapi.heartrails.com" target="_blank" rel="noopener">HeartRails
                                 Geo API</a>を利用しています。
                             </v-card-text>
                         </v-card>
