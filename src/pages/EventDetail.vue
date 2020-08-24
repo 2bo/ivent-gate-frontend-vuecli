@@ -34,7 +34,7 @@
                         <div class="description" v-html="event.description"></div>
                     </v-card-text>
                     <v-card-text>
-                        <v-btn block :href=event.event_url color="orange" target="_blank" dark>
+                        <v-btn block :href=event.event_url color="orange" target="_blank" rel="noopener" dark>
                             参加申し込み(情報提供元サイトへ)
                             <v-icon right>{{icon.openInNew}}</v-icon>
                         </v-btn>
