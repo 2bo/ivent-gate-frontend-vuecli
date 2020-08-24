@@ -7,6 +7,7 @@ import TaggedEventList from "./pages/TaggedEventList"
 import About from "./pages/About"
 import Terms from "./pages/Terms"
 import Request from "./pages/Request"
+import Privacy from "./pages/Privacy"
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,7 @@ const routes = [
     {path: '/about', name: 'about', component: About},
     {path: '/terms', name: 'terms', component: Terms},
     {path: '/request', name: 'request', component: Request},
+    {path: '/privacy', name: 'privacy', component: Privacy},
 ];
 
 const router = new VueRouter({
